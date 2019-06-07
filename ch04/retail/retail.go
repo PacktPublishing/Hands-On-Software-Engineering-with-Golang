@@ -37,8 +37,8 @@ func (pc *PriceCalculator) PriceForItem(itemUUID string) (float64, error) {
 	return pc.PriceForItemAtDate(itemUUID, time.Now())
 }
 
-// PriceForItem calculates the VAT-inclusive retail price of itemUUID with the
-// VAT rates that applied at a particular date.
+// PriceForItemAtDate calculates the VAT-inclusive retail price of itemUUID
+// with the VAT rates that applied at a particular date.
 func (pc *PriceCalculator) PriceForItemAtDate(itemUUID string, date time.Time) (float64, error) {
 	priceRes := struct {
 		Price float64 `json:"price"`
