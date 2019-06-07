@@ -68,22 +68,3 @@ func TestFizzBuzzTableDrivenSubtests(t *testing.T) {
 		})
 	}
 }
-
-func TestFizzBuzzTableDrivenSubtests(t *testing.T) {
-	specs := []struct {
-		descr, exp string
-		input      int
-	}{
-		{descr: "evenly divisible by 3", input: 9, exp: "Fizz"},
-		{descr: "evenly divisible by 3 and 5", input: 15, exp: "FizzBuzz"},
-		{descr: "edge case", input: 0, exp: "0"},
-	}
-
-	for specIndex, spec := range specs {
-		t.Run(spec.descr, func(t *testing.T) {
-			if got := fizzbuzz.Evaluate(spec.input); got != spec.exp {
-				t.Errorf("[spec %d: %s] expected to get %q; got %q", specIndex, spec.descr, spec.exp, got)
-			}
-		})
-	}
-}

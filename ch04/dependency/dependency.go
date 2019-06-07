@@ -11,6 +11,7 @@ const (
 	DepTypeResource
 )
 
+// API is implemented by clients of the project metadata micro-service.
 type API interface {
 	// ListDependencies returns the list of direct dependency IDs for a
 	// particular project ID or an error if a non-project ID argument is
