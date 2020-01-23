@@ -1,0 +1,110 @@
+syntax="proto3";
+package proto;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+
+// WorkerPayload encapsulates the possible message types that a worker can 
+// send to a master node.
+message WorkerPayload {
+  oneof payload {
+    Step step = 1;
+    RelayMessage relay_message = 2;
+  }
+}
+
+// MasterPayload encapsulates the possible message types that a master can
+// send to a worker node.
+message MasterPayload {
+  oneof payload {
+    JobDetails job_details = 1;
+    Step step = 2;
+    RelayMessage relay_message = 3;
+  }
+}
+
+// JobDetails describes a job assigned by a master node to a worker.
+message JobDetails {
+  // A unique ID for the job.
+  string job_id = 1;
+
+  // The creation time for the job.
+  google.protobuf.Timestamp created_at = 2;
+  
+  // The [from, to) UUID range assigned to the worker. Note that from is 
+  // inclusive and to is exclusive.
+  bytes partition_from_uuid = 3;
+  bytes partition_to_uuid = 4;
+}
+
+// Step describes the current state of a worker or a master. Workers send a
+// Step message with their current state to enter a synchronization barrier
+// and wait for the other workers. Once all workers reach the barrier, the 
+// master node (depending on the step type) processes the individual worker 
+// steps to update its global state and broadcasts a new Step message (with
+// a matching step type) to notify the workers that they can exit the barrier.
+message Step {
+  // The type of this step.
+  Type type = 1;
+
+  // Workers use this field to submit their local aggregator delta values wen
+  // reaching the POST step. The master collects the deltas, aggregates them to
+  // its own aggregator values and broadcasts the global aggregator values in
+  // the response. Workers must then *overwrite* their local aggregator values
+  // with the values provided by the master.
+  map<string, google.protobuf.Any> aggregator_values = 2;
+
+  // Workers use this field to submit their local active-in-step count when 
+  // reaching the POST_KEEP_RUNNING step. The step response broadcasted by
+  // the master uses the same field to specify the global active-in-step count
+  // that the workers should pass to the graph executor callbacks.
+  int64 activeInStep = 3;
+
+  // The type of this step.
+  enum Type {
+    INVALID = 0;
+    
+    // This step corresponds to the PRE step of the executor callback.
+    PRE = 1;
+
+    // This step corresponds to the POST step of the executor callback.
+    POST = 2;
+
+    // This step corresponds to the POST_KEEP_RUNNING step of the executor
+    // callback.
+    POST_KEEP_RUNNING = 3;
+
+    // This step indicates to the master that the worker has successfully
+    // completed the graph execution and is ready to perist the computation 
+    // results.
+    EXECUTED_GRAPH = 4;
+
+    // This step indicates to the master that the worker has successfully
+    // persisted the computation results.
+    PESISTED_RESULTS = 5;
+
+    // This step indicates to the master that the worker has completed the job.
+    COMPLETED_JOB = 6;
+  }
+}
+
+// RelayMessage describes a graph message that should be relayed to a remote
+// graph instance which is managed by another worker.
+message RelayMessage {
+  // The message destination UUID.
+  string destination = 1;
+
+  // The serialized message contents.
+  google.protobuf.Any message = 2;
+}
+
+// JobQueue implements a distributed job queue for graph-based algorithms.
+// for job announcements by the master node.
+service JobQueue {
+  // JobStream establishes a bi-directional connection between a worker and a
+  // master. The master eventually broadcasts a new job to the connected
+  // workers and the job super-steps are executed in lock-step across all
+  // workers.
+  rpc JobStream(stream WorkerPayload) returns (stream MasterPayload);
+}
+
