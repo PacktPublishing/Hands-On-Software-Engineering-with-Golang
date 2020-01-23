@@ -1,0 +1,36 @@
+# Deploy a single instance of the pagerank service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linksrus-pagerank-instance
+  namespace: linksrus
+  labels:
+    app: linksrus-pagerank-instance
+spec:
+  selector:
+    matchLabels:
+      app: linksrus-pagerank-instance
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: linksrus-pagerank-instance
+    spec:
+      containers:
+      - name: linksrus-pagerank
+        imagePullPolicy: Always
+        image: localhost:5000/linksrus-pagerank:latest
+        args:
+          - "-update-interval=15m"
+          - "-num-workers=8"
+          - "-link-graph-api=linksrus-linkgraph.linksrus-data:8080"
+          - "-text-indexer-api=linksrus-textindexer.linksrus-data:8080"
+          - "-partition-detection-mode=single"
+        ports:
+        - containerPort: 6060
+          name: pprof
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: 50m

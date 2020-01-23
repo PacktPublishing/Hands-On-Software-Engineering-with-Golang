@@ -1,0 +1,7 @@
+# Setting overrides for the CDB helm chart at:
+# https://github.com/helm/charts/tree/master/stable/cockroachdb
+Resources:
+ requests:
+   cpu: "100m"
+   memory: "512Mi"
+Storage: "100Mi"

@@ -1,0 +1,31 @@
+# Drop traffic to linksrus-data from all other namespaces; a separate policy
+# will be used to white-list the traffic we do want to allow
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  namespace: linksrus-data
+  name: deny-from-other-namespaces
+spec:
+  podSelector:
+    matchLabels:
+  ingress:
+  - from:
+    - podSelector: {}
+---
+# Allow all pods in the linksrus namespace (role: linksrus-components) to
+# access the link-graph and text-indexer APIs but none of the other pods in 
+# the linksrus-data namespace
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  namespace: linksrus-data
+  name: allow-access-to-data-apis
+spec:
+  podSelector:
+    matchLabels:
+      role: data-api
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels: 
+          role: linksrus-components

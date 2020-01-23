@@ -1,0 +1,60 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: linksrus-ingress
+  namespace: linksrus
+spec:
+  backend:
+    serviceName: linksrus-frontend
+    servicePort: 80
+---
+# A service with a cluster IP that serves as a load-balancer for the frontend
+# pods. It is exposed outside the cluster via the above ingress resource.
+apiVersion: v1
+kind: Service
+metadata:
+  name: linksrus-frontend
+  namespace: linksrus
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: web
+  selector:
+    app: linksrus-frontend-instance
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linksrus-frontend-instance
+  namespace: linksrus
+  labels:
+    app: linksrus-frontend-instance
+spec:
+  selector:
+    matchLabels:
+      app: linksrus-frontend-instance
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: linksrus-frontend-instance
+    spec:
+      containers:
+      - name: linksrus-frontend
+        imagePullPolicy: Always
+        image: localhost:5000/linksrus-frontend:latest
+        args:
+          - "-link-graph-api=linksrus-linkgraph.linksrus-data:8080"
+          - "-text-indexer-api=linksrus-textindexer.linksrus-data:8080"
+        ports:
+        - containerPort: 8080
+          name: www
+        - containerPort: 6060
+          name: pprof
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: 50m

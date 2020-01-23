@@ -1,0 +1,49 @@
+# A service with a cluster IP that serves as a load-balancer for the textindexer.
+apiVersion: v1
+kind: Service
+metadata:
+  name: linksrus-textindexer
+  namespace: linksrus-data
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: grpc
+  selector:
+    app: linksrus-textindexer-instance
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linksrus-textindexer-instance
+  namespace: linksrus-data
+  labels:
+    app: linksrus-textindexer-instance
+spec:
+  selector:
+    matchLabels:
+      app: linksrus-textindexer-instance
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: linksrus-textindexer-instance
+        role: data-api
+    spec:
+      containers:
+      - name: linksrus-textindexer
+        imagePullPolicy: Always
+        image: localhost:5000/linksrus-textindexer:latest
+        args:
+          - "-text-indexer-uri=es://elasticsearch-master.linksrus-data:9200"
+        ports:
+        - containerPort: 8080
+          name: grpc
+        - containerPort: 6060
+          name: pprof
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: 50m

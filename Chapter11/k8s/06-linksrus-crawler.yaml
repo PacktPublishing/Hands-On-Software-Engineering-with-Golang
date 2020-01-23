@@ -1,0 +1,53 @@
+# A headless service which allows pods to discover the number of pods in the 
+# stateful set by performing SRV queries.
+apiVersion: v1
+kind: Service
+metadata:
+  name: linksrus-crawler-headless
+  namespace: linksrus
+spec:
+  clusterIP: None
+  # Include the pprof port to ensure that SRV records are properly generated
+  ports:
+  - port: 6060
+    targetPort: 6060
+    name: pprof
+  selector:
+    app: linksrus-crawler-instance
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: linksrus-crawler-instance
+  namespace: linksrus
+  labels:
+    app: linksrus-crawler-instance
+spec:
+  serviceName: linksrus-crawler-headless
+  selector:
+    matchLabels:
+      app: linksrus-crawler-instance
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: linksrus-crawler-instance
+    spec:
+      containers:
+      - name: linksrus-crawler
+        imagePullPolicy: Always
+        image: localhost:5000/linksrus-crawler:latest
+        args:
+          - "-update-interval=5m"
+          - "-num-workers=64"
+          - "-link-graph-api=linksrus-linkgraph.linksrus-data:8080"
+          - "-text-indexer-api=linksrus-textindexer.linksrus-data:8080"
+          - "-partition-detection-mode=dns=linksrus-crawler-headless"
+        ports:
+        - containerPort: 6060
+          name: pprof
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: 100m
