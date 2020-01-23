@@ -1,0 +1,25 @@
+language: go
+
+go:
+  - 1.11.x
+
+services:
+  - elasticsearch
+
+env:
+  - ES_NODES=http://127.0.0.1:9200 CDB_DSN=postgresql://root@localhost:26257/linkgraph?sslmode=disable
+
+before_script:
+  - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.4.0-amd64.deb && sudo dpkg -i --force-confnew elasticsearch-7.4.0-amd64.deb && sudo chown -R elasticsearch:elasticsearch /etc/default/elasticsearch && sudo service elasticsearch restart
+  - wget -qO- https://binaries.cockroachdb.com/cockroach-v19.1.2.linux-amd64.tgz | tar xvz && cockroach-v19.1.2.linux-amd64/cockroach start --insecure --background --advertise-addr 127.0.0.1:26257
+  - cockroach-v19.1.2.linux-amd64/cockroach sql --insecure -e 'CREATE DATABASE linkgraph;'
+  - bash -c '[ -d "$GOPATH/src/github.com/achilleasa" ] && mv "$GOPATH/src/github.com/achilleasa" "$GOPATH/src/github.com/PacktPublishing" && echo "renamed project folder"'
+  - cd "$GOPATH/src/github.com/PacktPublishing/Hands-On-Software-Engineering-with-Golang"
+  - sleep 10
+
+script:
+  - make ci-check
+
+# Temporarily disabled
+#after_success:
+#  - bash <(curl -s https://codecov.io/bash)
