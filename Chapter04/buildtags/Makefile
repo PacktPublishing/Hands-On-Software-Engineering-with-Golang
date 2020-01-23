@@ -1,0 +1,13 @@
+include ../../Makefile
+
+test-all: 
+	go test -v -tags all_tests ./...
+
+test-units: 
+	go test -v -tags unit_tests ./...
+
+test-integration: 
+	go test -v -tags integration_tests ./...
+
+test-e2e: 
+	go test -v -tags e2e_tests ./...
