@@ -223,6 +223,14 @@
   version = "v1.3.0"
 
 [[projects]]
+  digest = "1:6ff1026b8d873d074ddec82ad60bb0eb537dc013f456ef26b63d30beba2f99e7"
+  name = "github.com/microcosm-cc/bluemonday"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "506f3da9b7c86d737e91f16b7431df8635871552"
+  version = "v1.0.2"
+
+[[projects]]
   branch = "master"
   digest = "1:c22fdadfe2de0e1df75987cac34f1c721157dc24f180c76b4ef66a3c9637a799"
   name = "github.com/mschoch/smat"
@@ -261,6 +269,17 @@
   pruneopts = "UT"
   revision = "20ad246f50b49590afcb1ed8ad143da7163869cb"
   version = "v1.1.10"
+
+[[projects]]
+  branch = "master"
+  digest = "1:b8452b9dd3afbfa5bab8b2c01977fb3ae0ef120a4187a06bc5903fceaa0af905"
+  name = "golang.org/x/net"
+  packages = [
+    "html",
+    "html/atom",
+  ]
+  pruneopts = "UT"
+  revision = "6afb5195e5aab057fda82e27171243402346b0ad"
 
 [[projects]]
   branch = "master"
@@ -306,6 +325,7 @@
     "github.com/juju/clock",
     "github.com/juju/clock/testclock",
     "github.com/lib/pq",
+    "github.com/microcosm-cc/bluemonday",
     "golang.org/x/xerrors",
     "gopkg.in/check.v1",
   ]
