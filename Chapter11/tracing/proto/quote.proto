@@ -1,0 +1,19 @@
+syntax="proto3";
+package proto;
+
+message QuoteRequest {
+  string SKU = 1;
+}
+
+message QuoteResponse {
+  repeated Quote quotes = 1;
+}
+
+message Quote {
+  string vendor = 1;
+  double price = 2;
+}
+
+service QuoteService {
+  rpc GetQuote(QuotesRequest) returns (QuotesResponse);
+}
