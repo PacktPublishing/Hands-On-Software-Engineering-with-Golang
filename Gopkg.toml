@@ -24,6 +24,13 @@
 #   go-tests = true
 #   unused-packages = true
 
+[[constraint]]
+  name = "github.com/blevesearch/bleve"
+  version = "0.8.1"
+
+[[constraint]]
+  name = "github.com/elastic/go-elasticsearch"
+  version = "0.0.0"
 
 [[constraint]]
   name = "github.com/golang/mock"

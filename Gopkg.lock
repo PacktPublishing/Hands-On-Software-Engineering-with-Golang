@@ -2,12 +2,154 @@
 
 
 [[projects]]
+  digest = "1:ae1c9dbbd55c96390aa936657d54a1e847d0310a3ca26856a96c4f07f7dfda87"
+  name = "github.com/RoaringBitmap/roaring"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "4676818d7478f72f5041418f5afbb15a5080dbb7"
+  version = "v0.4.21"
+
+[[projects]]
+  digest = "1:5073b32337382293d4e1dae5f2920a44b10f971cedfbd95411f628f17eae5455"
+  name = "github.com/blevesearch/bleve"
+  packages = [
+    ".",
+    "analysis",
+    "analysis/analyzer/standard",
+    "analysis/datetime/flexible",
+    "analysis/datetime/optional",
+    "analysis/lang/en",
+    "analysis/token/lowercase",
+    "analysis/token/porter",
+    "analysis/token/stop",
+    "analysis/tokenizer/unicode",
+    "document",
+    "geo",
+    "index",
+    "index/scorch",
+    "index/scorch/mergeplan",
+    "index/scorch/segment",
+    "index/scorch/segment/zap",
+    "index/store",
+    "index/store/boltdb",
+    "index/store/gtreap",
+    "index/upsidedown",
+    "mapping",
+    "numeric",
+    "registry",
+    "search",
+    "search/collector",
+    "search/facet",
+    "search/highlight",
+    "search/highlight/format/html",
+    "search/highlight/fragmenter/simple",
+    "search/highlight/highlighter/html",
+    "search/highlight/highlighter/simple",
+    "search/query",
+    "search/scorer",
+    "search/searcher",
+    "size",
+  ]
+  pruneopts = "UT"
+  revision = "65146f57438e9284fd929852a945ea79d5eea5bf"
+  version = "v0.8.1"
+
+[[projects]]
+  digest = "1:d9acc55e5a09863e9ae556c3e28f3703e94a3fc50a5a8b8dcb4bb02f913541c9"
+  name = "github.com/blevesearch/go-porterstemmer"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "23a2c8e5cf1f380f27722c6d2ae8896431dc7d0e"
+  version = "v1.0.2"
+
+[[projects]]
+  branch = "master"
+  digest = "1:e2a3505121c69765ccab66f72553c165150b0de22ecb7eca80dd9e26c61fc12e"
+  name = "github.com/blevesearch/segment"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "762005e7a34fd909a84586299f1dd457371d36ee"
+
+[[projects]]
+  branch = "master"
+  digest = "1:c03c8f31698bf39cdfa86ff15213ab6e01dc3b22eeae6d11cfaf37c63c0f259c"
+  name = "github.com/couchbase/vellum"
+  packages = [
+    ".",
+    "levenshtein",
+    "regexp",
+    "utf8",
+  ]
+  pruneopts = "UT"
+  revision = "ef2e028c01fdb60c46da4067d2e83745b8d54120"
+
+[[projects]]
+  digest = "1:edb569dd02419a41ddd98768cc0e7aec922ef19dae139731e5ca750afcf6f4c5"
+  name = "github.com/edsrzf/mmap-go"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "188cc3b666ba704534fa4f96e9e61f21f1e1ba7c"
+  version = "v1.0.0"
+
+[[projects]]
+  digest = "1:2af3a6e1f12e54cef95c6051cd1cb1e154629a4b82c692ac8a92f00259f570eb"
+  name = "github.com/elastic/go-elasticsearch"
+  packages = [
+    ".",
+    "esapi",
+    "estransport",
+  ]
+  pruneopts = "UT"
+  revision = "3aa68f5e96e138fa4dafc9403b10674b4310a632"
+  version = "v0.0.0"
+
+[[projects]]
+  digest = "1:f2ac2c724fc8214bb7b9dd6d4f5b7a983152051f5133320f228557182263cb94"
+  name = "github.com/etcd-io/bbolt"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a0458a2b35708eef59eb5f620ceb3cd1c01a824d"
+  version = "v1.3.3"
+
+[[projects]]
+  branch = "master"
+  digest = "1:3e58a7a4dd778768694d1733b076de0da7ad3d3be263017423ef6c93aa5cf563"
+  name = "github.com/glycerine/go-unsnap-stream"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "81cf024a9e0a906651886e23cb984a852a30b622"
+
+[[projects]]
   digest = "1:7ae311278f7ccaa724de8f2cdec0a507ba3ee6dea8c77237e8157bcf64b0f28b"
   name = "github.com/golang/mock"
   packages = ["gomock"]
   pruneopts = "UT"
   revision = "3dcdcb6994c4de42a73bd2e4790178be3ed4554b"
   version = "v1.4.0"
+
+[[projects]]
+  digest = "1:573ca21d3669500ff845bdebee890eb7fc7f0f50c59f2132f2a0c6b03d85086a"
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  pruneopts = "UT"
+  revision = "6c65a5562fc06764971b7c5d05c76c75e84bdbf7"
+  version = "v1.3.2"
+
+[[projects]]
+  digest = "1:e4f5819333ac698d294fe04dbf640f84719658d5c7ce195b10060cc37292ce79"
+  name = "github.com/golang/snappy"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2a8bb927dd31d8daada140a5d09578521ce5c36a"
+  version = "v0.0.1"
+
+[[projects]]
+  digest = "1:582b704bebaa06b48c29b0cec224a6058a09c86883aaddabde889cd1a5f73e1b"
+  name = "github.com/google/uuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0cd6bf5da1e1c83f8b45653022c74f71af0538a4"
+  version = "v1.1.1"
 
 [[projects]]
   digest = "1:0ade334594e69404d80d9d323445d2297ff8161637f9b2d347cc6973d2d6f05b"
@@ -82,6 +224,57 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:c22fdadfe2de0e1df75987cac34f1c721157dc24f180c76b4ef66a3c9637a799"
+  name = "github.com/mschoch/smat"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "90eadee771aeab36e8bf796039b8c261bebebe4f"
+
+[[projects]]
+  digest = "1:5e73b34a27d827212102605789de00bd411b2e434812133c83935fe9897c75e1"
+  name = "github.com/philhofer/fwd"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "bb6d471dc95d4fe11e432687f8b70ff496cf3136"
+  version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:970bd01f655c6e4cf6d335aadded53eca531d3d856f7de61eebe6fc253552b49"
+  name = "github.com/steveyen/gtreap"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0abe01ef9be25c4aedc174758ec2d917314d6d70"
+
+[[projects]]
+  digest = "1:36ef5eabe23d123cc7c2ea19991d230b32209178d06b32c43ead16039d20f3b6"
+  name = "github.com/tinylib/msgp"
+  packages = ["msgp"]
+  pruneopts = "UT"
+  revision = "490d90d0e69181d9cfedd28343d876cd361adcc3"
+  version = "v1.1.1"
+
+[[projects]]
+  digest = "1:85ddc8a0e53c1ebe8ba228f2303fb156feffd8f2b4bead4d1d0af9c293c6054f"
+  name = "github.com/willf/bitset"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "20ad246f50b49590afcb1ed8ad143da7163869cb"
+  version = "v1.1.10"
+
+[[projects]]
+  branch = "master"
+  digest = "1:c0f457d7a781c1acd2f11b5c4a89769201c1bda3d6770417a2c87b7f6be54a97"
+  name = "golang.org/x/sys"
+  packages = [
+    "unix",
+    "windows",
+  ]
+  pruneopts = "UT"
+  revision = "e047566fdf82409bf7a52212cf71df83ea2772fb"
+
+[[projects]]
+  branch = "master"
   digest = "1:918a46e4a2fb83df33f668f5a6bd51b2996775d073fce1800d3ec01b0a5ddd2b"
   name = "golang.org/x/xerrors"
   packages = [
@@ -103,7 +296,12 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/blevesearch/bleve",
+    "github.com/blevesearch/bleve/search/query",
+    "github.com/elastic/go-elasticsearch",
+    "github.com/elastic/go-elasticsearch/esapi",
     "github.com/golang/mock/gomock",
+    "github.com/google/uuid",
     "github.com/hashicorp/go-multierror",
     "github.com/juju/clock",
     "github.com/juju/clock/testclock",
