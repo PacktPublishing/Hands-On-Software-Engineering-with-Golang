@@ -56,6 +56,10 @@
   branch = "v1"
   name = "gopkg.in/check.v1"
 
+[[override]]
+  name = "github.com/russross/blackfriday"
+  version = "1.5.2"
+
 [prune]
   go-tests = true
   unused-packages = true
