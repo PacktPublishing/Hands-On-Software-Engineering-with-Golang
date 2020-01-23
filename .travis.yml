@@ -20,6 +20,5 @@ before_script:
 script:
   - make ci-check
 
-# Temporarily disabled
-#after_success:
-#  - bash <(curl -s https://codecov.io/bash)
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
