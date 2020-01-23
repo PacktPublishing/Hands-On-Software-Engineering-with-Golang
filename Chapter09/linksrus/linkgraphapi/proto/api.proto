@@ -1,0 +1,55 @@
+syntax="proto3";
+package proto;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// Link describes a link in the linkgraph.
+message Link {
+  bytes uuid = 1;
+  string url = 2;
+  google.protobuf.Timestamp retrieved_at = 3;
+}
+
+// Edge describes an edge in the linkgraph.
+message Edge {
+  bytes uuid = 1;
+  bytes src_uuid = 2;
+  bytes dst_uuid = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+// RemoveStaleEdgesQuery describes a query for removing stale edges from the
+// graph.
+message RemoveStaleEdgesQuery {
+  bytes from_uuid = 1;
+  google.protobuf.Timestamp updated_before = 2;
+}
+
+// Range specifies the [fromID, toID) range to use when streaming Links or Edges.
+message Range {
+  bytes from_uuid = 1;
+  bytes to_uuid = 2;
+
+  // Return results before this filter timestamp.
+  google.protobuf.Timestamp filter = 3;
+}
+
+// LinkGraph provides an RPC layer for accessing a linkgraph store.
+service LinkGraph {
+  // UpsertLink inserts or updates a link.
+  rpc UpsertLink(Link) returns (Link);
+
+  // UpsertEdge inserts or updates an edge.
+  rpc UpsertEdge(Edge) returns (Edge);
+
+  // Links streams the set of links in the specified ID range.
+  rpc Links(Range) returns (stream Link);
+
+  // Edges streams the set of edges in the specified ID range.
+  rpc Edges(Range) returns (stream Edge);
+
+	// RemoveStaleEdges removes any edge that originates from the specified
+	// link ID and was updated before the specified timestamp.
+  rpc RemoveStaleEdges(RemoveStaleEdgesQuery) returns (google.protobuf.Empty);
+}
