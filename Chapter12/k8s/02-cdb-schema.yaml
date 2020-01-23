@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cdb-ensure-schema
+  namespace: linksrus-data
+spec:
+  template:
+    spec:
+      containers:
+      - name: cdb-schema
+        imagePullPolicy: Always
+        image: localhost:5000/cdb-schema:latest
+        # In the next chapter we will replace these hardcoded values with a 
+        # config map.
+        args: 
+         - "linkgraph"
+         - "cdb-cockroachdb-public.linksrus-data"
+      restartPolicy: Never

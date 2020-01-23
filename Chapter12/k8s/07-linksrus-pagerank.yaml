@@ -1,0 +1,89 @@
+# A service with a cluster IP that serves as a load-balancer for the frontend
+# pods. It is exposed outside the cluster via the above ingress resource.
+apiVersion: v1
+kind: Service
+metadata:
+  name: pagerank-master
+  namespace: linksrus
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: grpc
+  selector:
+    app: linksrus-pagerank-master-instance
+---
+# Deploy a single master pod
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linksrus-pagerank-master-instance
+  namespace: linksrus
+  labels:
+    app: linksrus-pagerank-master-instance
+spec:
+  selector:
+    matchLabels:
+      app: linksrus-pagerank-master-instance
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: linksrus-pagerank-master-instance
+    spec:
+      containers:
+      - name: linksrus-pagerank-master
+        imagePullPolicy: Always
+        image: localhost:5000/linksrus-distributed-pagerank:latest
+        args:
+          - "-mode=master"
+          - "-update-interval=5m"
+          - "-master-port=8080"
+          - "-worker-acquire-timeout=10s"
+        ports:
+        - containerPort: 8080
+          name: grpc
+        - containerPort: 6060
+          name: pprof
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: 25m
+---
+# Deploy two worker pods
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linksrus-pagerank-worker-instance
+  namespace: linksrus
+  labels:
+    app: linksrus-pagerank-worker-instance
+spec:
+  selector:
+    matchLabels:
+      app: linksrus-pagerank-worker-instance
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: linksrus-pagerank-worker-instance
+    spec:
+      containers:
+      - name: linksrus-pagerank-worker
+        imagePullPolicy: Always
+        image: localhost:5000/linksrus-distributed-pagerank:latest
+        args:
+          - "-mode=worker"
+          - "-master-endpoint=pagerank-master:8080"
+          - "-link-graph-api=linksrus-linkgraph.linksrus-data:8080"
+          - "-text-indexer-api=linksrus-textindexer.linksrus-data:8080"
+        ports:
+        - containerPort: 6060
+          name: pprof
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: 50m

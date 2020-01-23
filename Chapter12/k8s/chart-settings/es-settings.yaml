@@ -1,0 +1,17 @@
+# Setting overrides for the ES helm chart at:
+# https://github.com/elastic/helm-charts/tree/master/elasticsearch
+antiAffinity: "soft"
+esJavaOpts: "-Xmx128m -Xms128m"
+resources:
+  requests:
+    cpu: "100m"
+    memory: "512M"
+  limits:
+    cpu: "1000m"
+    memory: "512M"
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: null
+  resources:
+    requests:
+      storage: 300M

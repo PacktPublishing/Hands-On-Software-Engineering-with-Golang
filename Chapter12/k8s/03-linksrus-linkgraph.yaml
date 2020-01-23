@@ -1,0 +1,49 @@
+# A service with a cluster IP that serves as a load-balancer for the linkgraph.
+apiVersion: v1
+kind: Service
+metadata:
+  name: linksrus-linkgraph
+  namespace: linksrus-data
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: grpc
+  selector:
+    app: linksrus-linkgraph-instance
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linksrus-linkgraph-instance
+  namespace: linksrus-data
+  labels:
+    app: linksrus-linkgraph-instance
+spec:
+  selector:
+    matchLabels:
+      app: linksrus-linkgraph-instance
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: linksrus-linkgraph-instance
+        role: data-api
+    spec:
+      containers:
+      - name: linksrus-linkgraph
+        imagePullPolicy: Always
+        image: localhost:5000/linksrus-linkgraph:latest
+        args:
+          - "-link-graph-uri=postgresql://cdb-cockroachdb-public.linksrus-data:26257/linkgraph?sslmode=disable"
+        ports:
+        - containerPort: 8080
+          name: grpc
+        - containerPort: 6060
+          name: pprof
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: 50m
