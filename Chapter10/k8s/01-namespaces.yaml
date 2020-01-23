@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: linksrus
+  labels:
+    role: linksrus-components
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: linksrus-data
+  labels:
+    role: linksrus-data
+
