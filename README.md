@@ -12,15 +12,16 @@ This is the code repository for [Hands-on Software Engineering with Golang](http
 
 ## What is this book about?
 
+This book distills the industry’s best practices for writing lean Go code that is easy to test and maintain and explores their practical application on Links ‘R’ US: an example project that crawls web-pages and applies the PageRank algorithm to assign an importance score to each one.
+
+This book covers the following exciting features:
+
 * Understand different stages of the software development life cycle and the role of a software engineer
 * Create APIs using gRPC and leverage the middleware offered by the gRPC ecosystem
 * Discover various approaches to managing package dependencies for your projects
 * Build an end-to-end project from scratch and explore different strategies for scaling it
 * Develop a graph processing system and extend it to run in a distributed manner
 * Deploy Go services on Kubernetes and monitor their health using Prometheus
-
-This book covers the following exciting features:
-
 
 If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1838554491) today!
 
@@ -57,6 +58,3 @@ has been writing code in a multitude of programming languages since the mid 90s.
 
 ### Suggestions and Feedback
 [Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.
-
-
-
