@@ -12,7 +12,10 @@ This is the code repository for [Hands-on Software Engineering with Golang](http
 
 ## What is this book about?
 
-This book distills the industry’s best practices for writing lean Go code that is easy to test and maintain and explores their practical application on Links ‘R’ US: an example project that crawls web-pages and applies the PageRank algorithm to assign an importance score to each one.
+This book distills the industry’s best practices for writing lean Go code that
+is easy to test and maintain and explores their practical application on Links
+‘R’ US: an example project that crawls web-pages and applies the PageRank
+algorithm to assign an importance score to each one.
 
 This book covers the following exciting features:
 
@@ -28,24 +31,17 @@ If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1838
 <a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
 alt="https://www.packtpub.com/" border="5" /></a>
 
-## Instructions and Navigations
-All of the code is organized into folders. For example, Chapter02.
+## Instructions
+All of the code is organized into folders labelled after the chapter they
+appear on. For example, Chapter02 contains the source code for the second book
+chapter and so on.
 
-The code will look like the following:
-```
-type Sword struct {
-name string // Important tip for RPG players: always name your swords!
-}
-// Damage returns the damage dealt by this sword.
-func (Sword) Damage() int {
-return 2
-}
-```
+We also provide a PDF file that has color images of the screenshots/diagrams
+used in this book. [Click here to download
+it](https://static.packt-cdn.com/downloads/9781838554491_ColorImages.pdf).
 
-**Following is what you need for this book:**
+### Intended audience
 This Golang programming book is for developers and software engineers looking to use Go to design and build scalable distributed systems effectively. Knowledge of Go programming and basic networking principles is required.
-
-We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781838554491_ColorImages.pdf).
 
 ### Related products
 * Hands-On System Programming with Go  [[Packt]](https://www.packtpub.com/application-development/hands-systems-programming-go?utm_source=github&utm_medium=repository&utm_campaign=9781789804072) [[Amazon]](https://www.amazon.com/dp/1789804078)
@@ -54,7 +50,15 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 ## Get to Know the Author
 **Achilleas Anagnostopoulos**
-has been writing code in a multitude of programming languages since the mid 90s. His main interest lies in building scalable, microservice-based distributed systems where components are interconnected via gRPC or message queues. Achilleas has over 4 years of experience building production-grade systems using Go and occasionally enjoys pushing the language to its limits through his experimental gopher-os project: a 64-bit kernel written entirely in Go. He is currently a member of the Juju team at Canonical, contributing to one of the largest open source Go code bases in existence.
+has been writing code in a multitude of programming languages since the mid
+90s. His main interest lies in building scalable, microservice-based
+distributed systems where components are interconnected via gRPC or message
+queues. Achilleas has over 4 years of experience building production-grade
+systems using Go and occasionally enjoys pushing the language to its limits
+through his experimental [gopher-os](https://github.com/gopher-os/gopher-os)
+project: a 64-bit kernel written entirely in Go. He is currently a member of
+the [Juju](https://jaas.ai/) team at Canonical, contributing to one of the
+largest open source Go [code bases](https://github.com/juju/juju) in existence.
 
 ### Suggestions and Feedback
 [Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.
