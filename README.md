@@ -36,6 +36,11 @@ All of the code is organized into folders labelled after the chapter they
 appear on. For example, Chapter02 contains the source code for the second book
 chapter and so on.
 
+The Makefile has been updated to manage dependencies via Go modules instead of
+the dep tool. However, the dep tool will be used as a _fall-back_ for old Go
+versions (that lack module support) or if the `GO111MODULE` environment
+variable is set to `off` prior to running any of the Makefile targets.
+
 We also provide a PDF file that has color images of the screenshots/diagrams
 used in this book. [Click here to download
 it](https://static.packt-cdn.com/downloads/9781838554491_ColorImages.pdf).
