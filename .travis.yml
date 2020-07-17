@@ -1,7 +1,7 @@
 language: go
 
 go:
-  - 1.11.x
+  - 1.13.x
 
 services:
   - elasticsearch
@@ -14,10 +14,13 @@ before_script:
   - wget -qO- https://binaries.cockroachdb.com/cockroach-v19.1.2.linux-amd64.tgz | tar xvz && cockroach-v19.1.2.linux-amd64/cockroach start --insecure --background --advertise-addr 127.0.0.1:26257
   - cockroach-v19.1.2.linux-amd64/cockroach sql --insecure -e 'CREATE DATABASE linkgraph;'
   - cd "$GOPATH/src/github.com/PacktPublishing/Hands-On-Software-Engineering-with-Golang"
+  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.27.0
   - sleep 10
 
 script:
-  - make ci-check
+  - GO111MODULE=off make ci-check
+  - rm -Rf vendor/
+  - GO111MODULE=on make ci-check
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

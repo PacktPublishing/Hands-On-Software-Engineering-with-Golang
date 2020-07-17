@@ -116,7 +116,7 @@ func (w *Worker) waitForJob(jobStream proto.JobQueue_JobStreamClient) (job.Detai
 
 	mMsg, err := jobStream.Recv()
 	if err != nil {
-		return jobDetails, xerrors.Errorf("unable to read job details from master: %w")
+		return jobDetails, xerrors.Errorf("unable to read job details from master: %w", err)
 	}
 
 	jobDetailsMsg := mMsg.GetJobDetails()
