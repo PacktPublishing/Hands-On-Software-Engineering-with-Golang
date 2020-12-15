@@ -40,7 +40,7 @@ run-cdb-migrations: migrate-check-deps check-cdb-env
 migrate-check-deps:
 	@if [ -z `which migrate` ]; then \
 		echo "[go get] installing golang-migrate cmd with cockroachdb support";\
-		go get -tags 'cockroachdb postgres' -u github.com/golang-migrate/migrate/cmd/migrate;\
+		go get -tags 'cockroachdb postgres' -u github.com/golang-migrate/migrate/v4/cmd/migrate;\
 	fi
 
 
