@@ -1,3 +1,7 @@
+## [Get this title for $10 on Packt's Spring Sale](https://www.packt.com/B13701?utm_source=github&utm_medium=packt-github-repo&utm_campaign=spring_10_dollar_2022)
+-----
+For a limited period, all eBooks and Videos are only $10. All the practical content you need \- by developers, for developers
+
 # Hands-on Software Engineering with Golang
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/PacktPublishing/Hands-On-Software-Engineering-with-Golang)](https://goreportcard.com/report/github.com/PacktPublishing/Hands-On-Software-Engineering-with-Golang)
