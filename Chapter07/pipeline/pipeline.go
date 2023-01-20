@@ -44,9 +44,9 @@ func New(stages ...StageRunner) *Pipeline {
 // and returns back any errors that may have occurred.
 //
 // Calls to Process block until:
-//  - all data from the source has been processed OR
-//  - an error occurs OR
-//  - the supplied context expires
+//   - all data from the source has been processed OR
+//   - an error occurs OR
+//   - the supplied context expires
 //
 // It is safe to call Process concurrently with different sources and sinks.
 func (p *Pipeline) Process(ctx context.Context, source Source, sink Sink) error {

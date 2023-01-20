@@ -104,11 +104,11 @@ func ensureHasTrailingSlash(s string) string {
 }
 
 // resolveURL expands target into an absolute URL using the following rules:
-// - targets starting with '//' are treated as absolute URLs that inherit the
-//   protocol from relTo.
-// - targets starting with '/' are absolute URLs that are appended to the host
-//   from relTo.
-// - all other targets are assumed to be relative to relTo.
+//   - targets starting with '//' are treated as absolute URLs that inherit the
+//     protocol from relTo.
+//   - targets starting with '/' are absolute URLs that are appended to the host
+//     from relTo.
+//   - all other targets are assumed to be relative to relTo.
 //
 // If the target URL cannot be parsed, an nil URL wil be returned.
 func resolveURL(relTo *url.URL, target string) *url.URL {
