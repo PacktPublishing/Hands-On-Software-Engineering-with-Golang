@@ -64,6 +64,8 @@ func (i *InMemoryBleveIndexer) Index(doc *index.Document) error {
 	key := dcopy.LinkID.String()
 
 	i.mu.Lock()
+	defer i.mu.Unlock()
+
 	// If updating, preserve existing PageRank score
 	if orig, exists := i.docs[key]; exists {
 		dcopy.PageRank = orig.PageRank
@@ -74,7 +76,6 @@ func (i *InMemoryBleveIndexer) Index(doc *index.Document) error {
 	}
 
 	i.docs[key] = dcopy
-	i.mu.Unlock()
 	return nil
 }
 
