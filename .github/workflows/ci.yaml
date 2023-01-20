@@ -1,0 +1,38 @@
+name: ci
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      ES_NODES: 'http://127.0.0.1:9200'
+      CDB_DSN: 'postgresql://root@localhost:26257/linkgraph?sslmode=disable'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.18'
+      - run: go version
+      - name: Install packages
+        run: |
+          sudo apt update
+          sudo apt install iputils-ping
+      - name: Provision elasticsearch
+        run: |
+          curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.4.0-amd64.deb
+          sudo dpkg -i --force-confnew elasticsearch-7.4.0-amd64.deb
+          sudo chown -R elasticsearch:elasticsearch /etc/default/elasticsearch
+          sudo service elasticsearch restart
+      - name: Provision cockroachdb
+        run: |
+          wget -qO- https://binaries.cockroachdb.com/cockroach-v19.1.2.linux-amd64.tgz | tar xvz && cockroach-v19.1.2.linux-amd64/cockroach start --insecure --background --advertise-addr 127.0.0.1:26257
+          cockroach-v19.1.2.linux-amd64/cockroach sql --insecure -e 'CREATE DATABASE linkgraph;'
+      - name: Install golangci-lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.50.1
+      - name: Run tests and collect coverage
+        run: |
+          make ci-check
+      - name: Upload coverage report
+        run: |
+          bash <(curl -s https://codecov.io/bash)

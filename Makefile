@@ -5,6 +5,8 @@ deps:
 		echo "[dep] fetching package dependencies";\
 		go get -u github.com/golang/dep/cmd/dep;\
 		dep ensure;\
+	else \
+		go get ./...; \
 	fi
 
 test: 
@@ -19,6 +21,8 @@ lint: lint-check-deps
 		-E gofmt \
 		-E unconvert \
 		--exclude-use-default=false \
+		-e SA1019 \
+		--timeout 5m \
 		./...
 
 lint-check-deps:
@@ -43,9 +47,11 @@ migrate-check-deps:
 		if [ "${GO111MODULE}" = "off" ]; then \
 			echo "[go get] installing github.com/golang-migrate/migrate/cmd/migrate"; \
 			go get -tags 'cockroachdb postgres' -u github.com/golang-migrate/migrate/cmd/migrate;\
+			go install -tags 'cockroachdb postgres' github.com/golang-migrate/migrate/cmd/migrate;\
 		else \
 			echo "[go get] installing github.com/golang-migrate/migrate/v4/cmd/migrate"; \
 			go get -tags 'cockroachdb postgres' -u github.com/golang-migrate/migrate/v4/cmd/migrate;\
+			go install -tags 'cockroachdb postgres' github.com/golang-migrate/migrate/v4/cmd/migrate;\
 		fi \
 	fi
 
