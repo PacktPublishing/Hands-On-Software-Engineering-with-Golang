@@ -43,6 +43,10 @@ the dep tool. However, the dep tool will be used as a _fall-back_ for old Go
 versions (that lack module support) or if the `GO111MODULE` environment
 variable is set to `off` prior to running any of the Makefile targets.
 
+Go 1.18+ is required for running the code/tests from the individual chapters.
+The latest version of Go for your platform can be downloaded
+[here](https://go.dev/dl/).
+
 We also provide a PDF file that has color images of the screenshots/diagrams
 used in this book. [Click here to download
 it](https://static.packt-cdn.com/downloads/9781838554491_ColorImages.pdf).
