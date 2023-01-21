@@ -3,7 +3,7 @@
 # Hands-on Software Engineering with Golang
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/PacktPublishing/Hands-On-Software-Engineering-with-Golang)](https://goreportcard.com/report/github.com/PacktPublishing/Hands-On-Software-Engineering-with-Golang)
-[![Build Status](https://travis-ci.org/PacktPublishing/Hands-On-Software-Engineering-with-Golang.svg?branch=master)](https://travis-ci.org/PacktPublishing/Hands-On-Software-Engineering-with-Golang)
+[![Build Status](https://github.com/PacktPublishing/Hands-On-Software-Engineering-with-Golang/actions/workflows/ci.yaml/badge.svg)](https://github.com/PacktPublishing/Hands-On-Software-Engineering-with-Golang/actions/workflows/ci.yaml)
 [![Coverage Report](https://codecov.io/gh/PacktPublishing/Hands-On-Software-Engineering-with-Golang/branch/master/graph/badge.svg)](https://codecov.io/gh/PacktPublishing/Hands-On-Software-Engineering-with-Golang)
 
 <a href="https://www.packtpub.com/in/programming/hands-on-software-engineering-with-golang?utm_source=github&utm_medium=repository&utm_campaign="><img src="https://www.packtpub.com/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/9/7/9781838554491-original.png" alt="" height="256px" align="right"></a>
@@ -67,9 +67,10 @@ distributed systems where components are interconnected via gRPC or message
 queues. Achilleas has over 4 years of experience building production-grade
 systems using Go and occasionally enjoys pushing the language to its limits
 through his experimental [gopher-os](https://github.com/gopher-os/gopher-os)
-project: a 64-bit kernel written entirely in Go. He is currently a member of
-the [Juju](https://jaas.ai/) team at Canonical, contributing to one of the
+project: a 64-bit kernel written entirely in Go. He is a former member of
+the [Juju](https://jaas.ai/) team at Canonical, and has contributed to one of the
 largest open source Go [code bases](https://github.com/juju/juju) in existence.
+He is currently working as an SRE at Google.
 
 ### Suggestions and Feedback
 [Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.
