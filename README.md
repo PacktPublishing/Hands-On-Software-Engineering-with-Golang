@@ -67,9 +67,10 @@ distributed systems where components are interconnected via gRPC or message
 queues. Achilleas has over 4 years of experience building production-grade
 systems using Go and occasionally enjoys pushing the language to its limits
 through his experimental [gopher-os](https://github.com/gopher-os/gopher-os)
-project: a 64-bit kernel written entirely in Go. He is currently a member of
-the [Juju](https://jaas.ai/) team at Canonical, contributing to one of the
+project: a 64-bit kernel written entirely in Go. He is a former member of
+the [Juju](https://jaas.ai/) team at Canonical, and has contributed to one of the
 largest open source Go [code bases](https://github.com/juju/juju) in existence.
+He is currently working as an SRE at Google.
 
 ### Suggestions and Feedback
 [Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.
