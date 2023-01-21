@@ -67,12 +67,12 @@ type Config struct {
 // Crawler implements a web-page crawling pipeline consisting of the following
 // stages:
 //
-// - Given a URL, retrieve the web-page contents from the remote server.
-// - Extract and resolve absolute and relative links from the retrieved page.
-// - Extract page title and text content from the retrieved page.
-// - Update the link graph: add new links and create edges between the crawled
-//   page and the links within it.
-// - Index crawled page title and text content.
+//   - Given a URL, retrieve the web-page contents from the remote server.
+//   - Extract and resolve absolute and relative links from the retrieved page.
+//   - Extract page title and text content from the retrieved page.
+//   - Update the link graph: add new links and create edges between the crawled
+//     page and the links within it.
+//   - Index crawled page title and text content.
 type Crawler struct {
 	p *pipeline.Pipeline
 }

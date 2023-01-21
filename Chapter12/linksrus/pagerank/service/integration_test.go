@@ -178,11 +178,15 @@ func (s *DistributedPageRankTestSuite) generateGraph(c *gc.C, numLinks, maxOutEd
 // and returns back the calculated scores as a map.
 func (s *DistributedPageRankTestSuite) runDistributedCalculator(c *gc.C, graphInstance graph.Graph, indexInstance index.Indexer, numWorkers int) map[uuid.UUID]float64 {
 	var (
-		ctx, cancelFn = context.WithCancel(context.TODO())
-		clk           = testclock.NewClock(time.Now())
-		wg            sync.WaitGroup
+		masterCtx, masterCancelFn = context.WithCancel(context.TODO())
+		workerCtx, workerCancelFn = context.WithCancel(context.TODO())
+		clk                       = testclock.NewClock(time.Now())
+		workerWg                  sync.WaitGroup
 	)
-	defer cancelFn()
+	defer func() {
+		workerCancelFn()
+		masterCancelFn()
+	}()
 
 	master, err := service.NewMasterNode(service.MasterConfig{
 		ListenAddress:  ":9998",
@@ -193,16 +197,16 @@ func (s *DistributedPageRankTestSuite) runDistributedCalculator(c *gc.C, graphIn
 	})
 	c.Assert(err, gc.IsNil)
 
-	wg.Add(1)
+	masterDoneCh := make(chan struct{})
 	go func() {
-		defer wg.Done()
-		c.Assert(master.Run(ctx), gc.IsNil)
+		defer close(masterDoneCh)
+		c.Assert(master.Run(masterCtx), gc.IsNil)
 	}()
 
-	wg.Add(numWorkers)
+	workerWg.Add(numWorkers)
 	for i := 0; i < numWorkers; i++ {
 		go func(i int) {
-			defer wg.Done()
+			defer workerWg.Done()
 			worker, err := service.NewWorkerNode(service.WorkerConfig{
 				MasterEndpoint:    ":9998",
 				MasterDialTimeout: 10 * time.Second,
@@ -212,19 +216,22 @@ func (s *DistributedPageRankTestSuite) runDistributedCalculator(c *gc.C, graphIn
 				Logger:            s.logger.WithField("worker_id", i),
 			})
 			c.Assert(err, gc.IsNil)
-			c.Assert(worker.Run(ctx), gc.IsNil)
+			c.Assert(worker.Run(workerCtx), gc.IsNil)
 		}(i)
 	}
 
-	// Trigger an update on the master
+	// Trigger an update on the master and then wait until it blocks waiting
+	// on the next update tick.
 	c.Assert(clk.WaitAdvance(time.Minute, 60*time.Second, 1), gc.IsNil)
-
-	// Wait till the master goes back to the main loop and stop it
 	c.Assert(clk.WaitAdvance(time.Second, 60*time.Second, 1), gc.IsNil)
-	cancelFn()
 
-	// Wait for master and workers to shut down.
-	wg.Wait()
+	// Shutdown workers and wait for them to clean up.
+	workerCancelFn()
+	workerWg.Wait()
+
+	// Finally, shutdown the master and wait for it to clean up.
+	masterCancelFn()
+	<-masterDoneCh
 
 	return s.extractScores(c, graphInstance, indexInstance)
 }
