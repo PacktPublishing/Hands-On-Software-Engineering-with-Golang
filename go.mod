@@ -6,7 +6,7 @@ require (
 	github.com/blevesearch/bleve/v2 v2.3.6
 	github.com/elastic/go-elasticsearch v0.0.0
 	github.com/golang/mock v1.6.0
-	github.com/golang/protobuf v1.5.2
+	github.com/golang/protobuf v1.5.3
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/mux v1.8.0
 	github.com/grpc-ecosystem/grpc-opentracing v0.0.0-20180507213350-8e809c8a8645
@@ -19,9 +19,9 @@ require (
 	github.com/sirupsen/logrus v1.9.0
 	github.com/uber/jaeger-client-go v2.30.0+incompatible
 	github.com/urfave/cli v1.22.11
-	golang.org/x/oauth2 v0.4.0
+	golang.org/x/oauth2 v0.7.0
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2
-	google.golang.org/grpc v1.53.0
+	google.golang.org/grpc v1.56.3
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
 )
 
@@ -70,10 +70,10 @@ require (
 	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
 	go.etcd.io/bbolt v1.3.6 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
-	golang.org/x/net v0.7.0 // indirect
-	golang.org/x/sys v0.5.0 // indirect
-	golang.org/x/text v0.7.0 // indirect
+	golang.org/x/net v0.9.0 // indirect
+	golang.org/x/sys v0.7.0 // indirect
+	golang.org/x/text v0.9.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20230119192704-9d59e20e5cd1 // indirect
-	google.golang.org/protobuf v1.28.1 // indirect
+	google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1 // indirect
+	google.golang.org/protobuf v1.30.0 // indirect
 )
